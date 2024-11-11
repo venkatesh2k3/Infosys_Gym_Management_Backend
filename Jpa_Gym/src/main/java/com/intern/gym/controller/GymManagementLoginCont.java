@@ -18,16 +18,19 @@ public class GymManagementLoginCont {
 	@Autowired
 	GymManagementLoginServ gmls;
 
-	@GetMapping("")
 	@PostMapping("/login")
 	public String login(@RequestBody GymManagement loginRequest) {
-		String email = loginRequest.getEmail();
-		String password = loginRequest.getPassword();
-		GymManagement userFromDatabase = gmls.findByEmail(email);
-		if (userFromDatabase != null && userFromDatabase.getPassword().equals(password)) {
-			return "1";
-		} else {
-			return "0";
-		}
+	    String email = loginRequest.getEmail();
+	    String password = loginRequest.getPassword();
+	    GymManagement userFromDatabase = gmls.findByEmail(email);
+	    if (userFromDatabase != null && userFromDatabase.getPassword().equals(password)) {
+	        return String.valueOf(userFromDatabase.getUserId());
+	    } else {
+	        return "0";
+	    }
 	}
+
+
+
 }
+
